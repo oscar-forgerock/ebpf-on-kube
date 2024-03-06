@@ -1,0 +1,15 @@
+apiVersion: bpfman.io/v1alpha1
+kind: TracepointProgram
+metadata:
+  labels:
+    app.kubernetes.io/name: tracepointprogram
+  name: oomkill-bpf
+spec:
+  bpffunctionname: execve_recorder
+  # Select all nodes
+  nodeselector: {}
+  names:
+    - syscalls/sys_enter_execv
+  bytecode:
+    image:
+      url: quay.io/bpfman-bytecode/tracepoint:latest
